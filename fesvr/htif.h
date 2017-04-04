@@ -17,6 +17,7 @@ class htif_t
 
   virtual void start();
   virtual void stop();
+  virtual void step_htif();
 
   int run();
   bool done();
@@ -63,6 +64,8 @@ class htif_t
 
   const std::vector<std::string>& target_args() { return targs; }
   std::string read_config_string(reg_t addr);
+  std::queue<reg_t> fromhost_queue;
+  std::function<void(reg_t)> fromhost_callback;
 
   friend class memif_t;
   friend class syscall_t;
